@@ -1,0 +1,16 @@
+# config/locales/posts.en.yml
+en:
+  posts:
+    index:
+      title: "Posts"
+      new: "New Post"
+      edit: "Edit Post"
+      show: "Show Post"
+      destroy: "Destroy Post"
+    created: "Post was successfully created."
+    updated: "Post was successfully updated."
+    destroyed: "Post was successfully destroyed."
+    form:
+      title: "Title"
+      body: "Body"
+      published_at: "Published At"
