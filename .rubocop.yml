@@ -1,4 +1,4 @@
-require:
+plugins:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-performance
@@ -9,6 +9,7 @@ AllCops:
   TargetRubyVersion: 4.0
   Exclude:
     - 'db/schema.rb'
+    - 'db/queue_schema.rb'
     - 'db/migrate/*'
     - 'bin/*'
     - 'node_modules/**/*'
