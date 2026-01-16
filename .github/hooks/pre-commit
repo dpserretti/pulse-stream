@@ -7,7 +7,7 @@ echo "🚀 Running quality gates before commit..."
 
 # 1. Check for Linting (Fail Fast)
 echo "🔎 Checking Ruby style with RuboCop..."
-bundle exec rubocop
+bundle exec rubocop -A
 if [ $? -ne 0 ]; then
   echo "❌ RuboCop found offenses. Commit aborted."
   exit 1
