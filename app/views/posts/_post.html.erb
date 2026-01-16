@@ -1,22 +1,9 @@
 <div id="<%= dom_id post %>">
-  <div>
-    <strong>Title:</strong>
-    <%= post.title %>
-  </div>
+  <p class="text-sm font-bold text-gray-500">Title</p>
+  <p class="text-lg text-gray-900 mb-4"><%= post.title %></p>
 
-  <div>
-    <strong>Body:</strong>
-    <%= post.body %>
+  <p class="text-sm font-bold text-gray-500">Content</p>
+  <div class="prose max-w-none">
+    <%= post.content %>
   </div>
-
-  <div>
-    <strong>Published at:</strong>
-    <%= post.published_at %>
-  </div>
-
-  <div>
-    <strong>Tenant:</strong>
-    <%= post.tenant_id %>
-  </div>
-
 </div>

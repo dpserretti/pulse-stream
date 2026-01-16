@@ -58,6 +58,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.expect(post: %i[title body published_at])
+    params.expect(post: %i[title content published_at])
   end
 end

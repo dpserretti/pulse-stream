@@ -1,31 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full bg-gray-50">
   <head>
-    <title><%= content_for(:title) || "Pulse Stream" %></title>
+    <title>PulseStream Dashboard</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Pulse Stream">
-    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= yield :head %>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <body class="h-full">
+    <div class="min-h-full">
+      <div class="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
+        <div class="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-white pt-5">
+          <div class="flex flex-shrink-0 items-center px-4">
+            <span class="text-xl font-bold text-indigo-600">PulseStream</span>
+          </div>
+          <div class="mt-8 flex flex-grow flex-col">
+            <nav class="flex-1 space-y-1 px-2 pb-4">
+              <%= link_to authenticated_root_path, class: "group flex items-center px-2 py-2 text-sm font-medium rounded-md bg-gray-100 text-gray-900" do %>
+                <span class="truncate">Dashboard</span>
+              <% end %>
+
+              <%= link_to posts_path, class: "group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900" do %>
+                <span class="truncate">Posts & Newsletters</span>
+              <% end %>
+
+              <a href="#" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                <span class="truncate">Subscribers</span>
+              </a>
+            </nav>
+          </div>
+          <div class="flex flex-shrink-0 border-t border-gray-200 p-4 bg-gray-50">
+            <div class="group block flex-shrink-0">
+              <div class="flex items-center">
+                <div class="ml-3">
+                  <p class="text-xs font-medium text-gray-500 uppercase tracking-wider">Current Workspace</p>
+                  <p class="text-sm font-bold text-gray-900"><%= Current.tenant&.name %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:pl-64">
+        <div class="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white shadow">
+          <div class="flex flex-1 justify-between px-4">
+            <div class="flex flex-1 items-center font-semibold text-gray-700">
+               Welcome back, <%= current_user.email.split('@').first.capitalize %>
+            </div>
+            <div class="ml-4 flex items-center md:ml-6">
+              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "ml-3 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700" %>
+            </div>
+          </div>
+        </div>
+
+        <main class="flex-1">
+          <div class="py-6">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+              <%= yield %>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
   </body>
 </html>
