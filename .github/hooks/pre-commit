@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Pre-commit hook for PulseStream
+# High-speed quality gate: Linting -> Security -> Tests
+
+echo "🚀 Running quality gates before commit..."
+
+# 1. Check for Linting (Fail Fast)
+echo "🔎 Checking Ruby style with RuboCop..."
+bundle exec rubocop
+if [ $? -ne 0 ]; then
+  echo "❌ RuboCop found offenses. Commit aborted."
+  exit 1
+fi
+
+# 2. Run the full CI suite (Brakeman, Audits, and Tests)
+echo "🧪 Running full CI suite..."
+bin/ci
+if [ $? -ne 0 ]; then
+  echo "❌ CI failed. Please check the logs above. Commit aborted."
+  exit 1
+fi
+
+echo "✅ All checks passed! Proceeding with commit."
+exit 0
