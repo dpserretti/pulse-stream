@@ -3,8 +3,18 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
+    @tenant = tenants(:one)
+    @user = users(:one)
     @post = posts(:one)
+
+    # 2. Configure the host to match the tenant's subdomain for the tests
+    host! "#{@tenant.subdomain}.lvh.me"
+
+    # 3. Authenticate the user
+    sign_in @user
   end
 
   test 'should get index' do

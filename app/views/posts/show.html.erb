@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @post %>
+<%= render partial: 'posts/post', locals: { post: @post } %>
 
 <div>
   <%= link_to "Edit this post", edit_post_path(@post) %> |

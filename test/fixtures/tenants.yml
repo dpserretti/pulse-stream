@@ -1,9 +1,11 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/tenants.yml
 
+# Primary test tenant
 one:
-  name: MyString
-  subdomain: MyString
+  name: "First Streamer"
+  subdomain: "streamer1"
 
+# Secondary test tenant to verify isolation
 two:
-  name: MyString
-  subdomain: MyString
+  name: "Second Streamer"
+  subdomain: "streamer2"
